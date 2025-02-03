@@ -12,7 +12,7 @@ int main() {
     printf("Guess the number between 1 and 100\n");
 
     do {
-        printf("Enter your guess: ");
+        printf("Enter your guess: \n");
         scanf("%d", &guess);
         attempts++;
 
