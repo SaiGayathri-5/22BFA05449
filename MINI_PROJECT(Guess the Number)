@@ -1,3 +1,8 @@
+/* Number Guessing Game
+This is a simple number guessing game where the user has to guess a randomly generated number within a given range */
+
+//Code:
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -30,3 +35,34 @@ int main() {
 
     return 0;
 }
+
+
+Input/Output
+
+1.Input:
+Welcome to the Number Guessing Game!
+Guess the number between 1 and 100 
+Enter your guess:56
+Output:
+Too high! Try again.
+
+2.Input:
+Welcome to the Number Guessing Game!
+Guess the number between 1 and 100 
+Enter your guess:50
+Output:
+Too low! Try again
+
+3.Input:
+Welcome to the Number Guessing Game!
+Guess the number between 1 and 100 
+Enter your guess:78
+Output:
+Too high! Try again.
+
+4.Input:
+Welcome to the Number Guessing Game!
+Guess the number between 1 and 100 
+Enter your guess:56
+Output:
+Too low! Try again.
