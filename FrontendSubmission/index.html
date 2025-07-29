@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>URL Shortener</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>URL Shortener</h1>
+
+    <input type="text" id="longUrl" placeholder="Enter Long URL" />
+    <input type="text" id="validity" placeholder="Validity (minutes) - optional" />
+    <input type="text" id="customCode" placeholder="Custom shortcode - optional" />
+
+    <button onclick="shortenURL()">Shorten URL</button>
+
+    <a href="stats.html">View Stats</a>
+
+    <div id="result" class="result-container"></div>
+  </div>
+
+  <script>
+    function generateShortcode(length = 6) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let code = '';
+      for (let i = 0; i < length; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return code;
+    }
+
+    function shortenURL() {
+      const longUrl = document.getElementById('longUrl').value.trim();
+      const validity = document.getElementById('validity').value.trim();
+      const customCode = document.getElementById('customCode').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      if (!longUrl) {
+        resultDiv.innerHTML = `<p style="color: red;">Please enter a valid long URL.</p>`;
+        return;
+      }
+
+      const code = customCode || generateShortcode();
+      const expiry = validity ? Date.now() + parseInt(validity) * 60 * 1000 : null;
+
+      const shortUrl = `${window.location.origin}/${code}`;
+
+      // Store data in localStorage
+      const data = {
+        longUrl,
+        expiry,
+        createdAt: Date.now(),
+        clicks: 0,
+      };
+
+      localStorage.setItem(code, JSON.stringify(data));
+
+      resultDiv.innerHTML = `
+        <p><strong>Shortened URL:</strong> <a href="${shortUrl}" target="_blank">${shortUrl}</a></p>
+      `;
+    }
+  </script>
+</body>
+</html>
